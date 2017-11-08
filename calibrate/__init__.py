@@ -34,3 +34,20 @@ def average(Matrix):
         else:
             break
     return AvgMatrix
+
+def rectfiy(CalMatrix,RawMatrix):
+    """
+    This rectifies the RawMatrix based on the CalMatrix
+    :param CalMatrix: Reduced calibration Matrix (65x3)
+    :param RawMatrix: n x 3 array, all column 1 values should be in CalMatrix column 1
+    :return: sorted RectifyMatrix
+    """
+    NumPoints = len(RawMatrix)
+    RectifyMatrix = np.zeros((NumPoints,3))
+    RectifyMatrix[:,0:2]=RawMatrix[:,0:2]
+    for i in range (NumPoints):
+        Tx = RawMatrix[i,0]
+        index = np.where(CalMatrix[:,0]==Tx)[0]
+        RectifyMatrix[i,2] = RawMatrix[i,2] - CalMatrix[index,2]
+    return sort(RectifyMatrix)
+

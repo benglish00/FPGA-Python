@@ -11,3 +11,6 @@ CalAvg = calibrate.average(CalMatrix)
 RawFile = import_data.pathname("Data1430.csv")
 RawMatrix = import_data.csv_to_array(RawFile)
 
+#Rectify Scan
+RecData = calibrate.rectfiy(CalAvg,RawMatrix)
+print(RecData)

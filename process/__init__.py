@@ -83,6 +83,17 @@ def poly_coeff(Matrix, column=2):
     return [window, amp_polyfit]
 
 def poly_data(Matrix, column=2):
+    """
+    Generates an polynomical fit array for plotting
+    1. find index of maximum
+    2. define a window of data to fit
+    3. calculate the coefficients of a 2nd order fit
+    4. define and then build polyfit
+    for a window
+    :param Matrix: (nx3) float
+    :param column: int (0-2)
+    :return: polyfit (nx2) float
+    """
     index = np.argmax(Matrix[:, column])
     window = set_window(index, len(Matrix))
     coeff = poly_coeff(Matrix)[1]

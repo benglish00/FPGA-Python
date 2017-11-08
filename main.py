@@ -14,7 +14,5 @@ RawMatrix = import_data.csv_to_array(RawFile)
 
 #Rectify Scan
 RecMatrix = calibrate.rectfiy(CalAvg,RawMatrix)
-# NewFile = import_data.pathname("RecScan1430.csv")
-# np.savetxt(NewFile,RecMatrix,delimiter=",")
 Peaks = process.easy_max(RecMatrix)
 print(Peaks)

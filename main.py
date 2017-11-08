@@ -18,7 +18,6 @@ RecMatrix = calibrate.rectify(CalAvg,RawMatrix)
 Peaks = process.poly_max(RecMatrix)
 print(Peaks)
 
-
 #Plotting
 polyfit = process.poly_data(RecMatrix)
 plt.plot(RecMatrix[:,0],RecMatrix[:,2],'ro', polyfit[:,0], polyfit[:,1],'b', linewidth=8)

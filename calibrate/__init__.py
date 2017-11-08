@@ -15,18 +15,22 @@ def sort(Matrix):
     return SortedMatrix
 
 def average(Matrix):
+    """
+
+    :param Matrix:
+    :return:
+    """
     Matrix = sort(Matrix)
-    NumberRows = len(Matrix)
     AvgMatrix = np.zeros((65,3))
     maxValue = max(Matrix[:,0])
     i = m = n = 0
     while Matrix[i,0] <= maxValue:
-        Tx = Matrix[i,0]
         index = np.where(Matrix[:,0]==Matrix[i,0])[0]
-        print(index)
         for n in range(0,3):
-            a = 2
             AvgMatrix[m,n] = np.mean(Matrix[index[0:],n])
         m = m + 1
-        i = index[-1]+1
-        print(AvgMatrix)
+        if index[-1]+1 < len(Matrix):
+            i = index[-1]+1
+        else:
+            break
+    return AvgMatrix

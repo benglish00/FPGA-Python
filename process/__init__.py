@@ -1,7 +1,5 @@
 import numpy as np
 import import_data as imp
-import scipy
-
 
 def print_hello():
     print("hello from process")
@@ -14,8 +12,8 @@ def set_window(center, length):
     :param center: int
     :return: window (int1, int2)
     """
-    winsize = 21
-    halfwin = winsize // 2
+    winsize = length//10
+    halfwin = winsize//2
     if center < halfwin:
         window = [0, winsize - 1]
     elif center > (length - halfwin):
@@ -42,3 +40,29 @@ def write_scan(Matrix):
     """
     new_file = imp.pathname("RecScan1430.csv")
     np.savetxt(new_file, Matrix, delimiter=",")
+
+def poly_max(Matrix, column=2):
+    """
+    Calculates peaks of column 1 based on windowed average
+    Calculate peak of column 2 based on 2nd order poly
+    Calculate peak of column 1 based on derivative of 2nd order poly
+    :param Matrix: (m x n) float
+    :param column: int
+    :return: [3x1] float
+    """
+    index = np.argmax(Matrix[:, column])
+    window = set_window(index, len(Matrix))
+    fft_peak = np.mean(Matrix[window[0]:window[1], 1])
+    #
+    freq_slice = Matrix[window[0]:window[1],
+                 0]
+    amp_slice = Matrix[window[0]:window[1],
+                2]
+    amp_polyfit = np.polyfit(freq_slice,
+                             amp_slice,
+                             2)
+    freq_peak = -amp_polyfit[1]/(2*amp_polyfit[0])
+    amp_peak = amp_polyfit[0]*freq_peak**2 \
+               + amp_polyfit[1]*freq_peak \
+               + amp_polyfit[2]
+    return [freq_peak, fft_peak, amp_peak]

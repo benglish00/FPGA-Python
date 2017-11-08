@@ -4,7 +4,6 @@ import import_data as imp
 def print_hello():
     print("hello from process")
 
-
 def set_window(center, length):
     """
     Defines a window size and resets windows on edge
@@ -22,7 +21,6 @@ def set_window(center, length):
         window = [center - halfwin, center + halfwin]
     return window
 
-
 def easy_max(Matrix, column=2):
     index = np.argmax(Matrix[:, column])
     amp_peak = Matrix[index, column]
@@ -30,7 +28,6 @@ def easy_max(Matrix, column=2):
     window = set_window(index, len(Matrix))
     fft_peak = np.mean(Matrix[window[0]:window[1], 1])
     return [freq_peak, fft_peak, amp_peak]
-
 
 def write_scan(Matrix):
     """

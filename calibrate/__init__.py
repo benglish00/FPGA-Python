@@ -37,7 +37,7 @@ def average(Matrix):
             break
     return AvgMatrix
 
-def rectfiy(CalMatrix,RawMatrix):
+def rectify(CalMatrix,RawMatrix):
     """
     This rectifies the RawMatrix based on the CalMatrix
     :param CalMatrix: Reduced calibration Matrix (65x3)

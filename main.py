@@ -12,6 +12,6 @@ RawFile = import_data.pathname("Data1430.csv")
 RawMatrix = import_data.csv_to_array(RawFile)
 
 #Rectify Scan
-RecMatrix = calibrate.rectfiy(CalAvg,RawMatrix)
+RecMatrix = calibrate.rectify(CalAvg,RawMatrix)
 Peaks = process.poly_max(RecMatrix)
 print(Peaks)

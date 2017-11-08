@@ -16,9 +16,11 @@ def sort(Matrix):
 
 def average(Matrix):
     """
-
-    :param Matrix:
-    :return:
+    The input matrix is includes multiple (x,y1,y2) data sets.
+    The function averages y1 and y2 for each x and returns a
+    reduced Matrix. It is currently exactly [65,3]
+    :param Matrix: [m x 3] array
+    :return: AvgMatrx: exactly [65,3]
     """
     Matrix = sort(Matrix)
     AvgMatrix = np.zeros((65,3))

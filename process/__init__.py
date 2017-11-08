@@ -1,8 +1,11 @@
 import numpy as np
+import import_data as imp
 import scipy
+
 
 def print_hello():
     print("hello from process")
+
 
 def set_window(center, length):
     """
@@ -14,17 +17,28 @@ def set_window(center, length):
     winsize = 21
     halfwin = winsize // 2
     if center < halfwin:
-        window = [0,winsize-1]
+        window = [0, winsize - 1]
     elif center > (length - halfwin):
-        window = [-winsize,-1]
+        window = [-winsize, -1]
     else:
-        window = [center-halfwin, center+halfwin]
+        window = [center - halfwin, center + halfwin]
     return window
 
-def easy_max(Matrix,column=2):
-    index = np.argmax(Matrix[:,column])
-    amp_peak = Matrix[index,column]
-    freq_peak = Matrix[index,0]
+
+def easy_max(Matrix, column=2):
+    index = np.argmax(Matrix[:, column])
+    amp_peak = Matrix[index, column]
+    freq_peak = Matrix[index, 0]
     window = set_window(index, len(Matrix))
-    fft_peak = np.mean(Matrix[window[0]:window[1],1])
+    fft_peak = np.mean(Matrix[window[0]:window[1], 1])
     return [freq_peak, fft_peak, amp_peak]
+
+
+def write_scan(Matrix):
+    """
+    Writes a matrix to a file as a debug
+    :param Matrix: (m x n) float
+    :return: none
+    """
+    new_file = imp.pathname("RecScan1430.csv")
+    np.savetxt(new_file, Matrix, delimiter=",")

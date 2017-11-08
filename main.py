@@ -1,6 +1,5 @@
 import import_data
 import calibrate
-import numpy as np
 import process
 
 # Get Calibration matrix

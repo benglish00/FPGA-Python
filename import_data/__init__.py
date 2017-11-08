@@ -1,5 +1,6 @@
 import os
 import csv
+import numpy
 
 def print_hello():
     print("hello")
@@ -12,22 +13,5 @@ def pathname(filename):
     """
     return os.path.join("C:\\","Users", "Brian", "OneDrive", "Data", "FPGA_Sensor_Test", filename)
 
-def importCSV(filename):
-    """
-    return csv data
-    :param filename: string
-    :return: csv data from file
-    """
-    r = list()
-    with open(filename, "r") as f:
-        r = r.append(csv.reader(f, delimiter=","))
-        return r
-
-def printCSV(csvData):
-    """
-    return None
-    :param csvData: List
-    :return: None
-    """
-    for row in csvData:
-        print(",".join(row))
+def csv_to_array(filename):
+    return numpy.genfromtxt(filename, delimiter=",")

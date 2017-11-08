@@ -1,6 +1,7 @@
 import import_data
-import numpy
 import calibrate
+import numpy as np
+import process
 
 # Get Calibration matrix
 CalFile = import_data.pathname("RawCal1430.csv")
@@ -12,5 +13,8 @@ RawFile = import_data.pathname("Data1430.csv")
 RawMatrix = import_data.csv_to_array(RawFile)
 
 #Rectify Scan
-RecData = calibrate.rectfiy(CalAvg,RawMatrix)
-print(RecData)
+RecMatrix = calibrate.rectfiy(CalAvg,RawMatrix)
+# NewFile = import_data.pathname("RecScan1430.csv")
+# np.savetxt(NewFile,RecMatrix,delimiter=",")
+Peaks = process.easy_max(RecMatrix)
+print(Peaks)

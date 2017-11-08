@@ -3,7 +3,7 @@ import csv
 import numpy
 
 def print_hello():
-    print("hello")
+    print("hello from import data")
 
 def pathname(filename):
     """

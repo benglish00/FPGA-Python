@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08f2a1e9-993b-4ba2-8e46-cc9c0ac55c85" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/FPGA-Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FPGA-Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/process/__init__.py" afterDir="false" />
-    </list>
+    <list default="true" id="08f2a1e9-993b-4ba2-8e46-cc9c0ac55c85" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -340,12 +334,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="183" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23489584" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" side_tool="true" visible="true" weight="0.3315734" />
+      <window_info anchor="bottom" id="Run" order="2" side_tool="true" weight="0.3315734" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

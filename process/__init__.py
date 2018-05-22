@@ -1,8 +1,10 @@
 import numpy as np
 import import_data as imp
 
+
 def print_hello():
     print("hello from process")
+
 
 def set_window(center, length):
     """
@@ -11,8 +13,8 @@ def set_window(center, length):
     :param center: int
     :return: window (int1, int2)
     """
-    winsize = length//8
-    halfwin = winsize//2
+    winsize = length // 8
+    halfwin = winsize // 2
     if center < halfwin:
         window = [0, winsize - 1]
     elif center > (length - halfwin):
@@ -20,6 +22,7 @@ def set_window(center, length):
     else:
         window = [center - halfwin, center + halfwin]
     return window
+
 
 def easy_max(Matrix, column=2):
     index = np.argmax(Matrix[:, column])
@@ -29,6 +32,7 @@ def easy_max(Matrix, column=2):
     fft_peak = np.mean(Matrix[window[0]:window[1], 1])
     return [freq_peak, fft_peak, amp_peak]
 
+
 def write_scan(Matrix):
     """
     Writes a matrix to a file as a debug
@@ -37,6 +41,7 @@ def write_scan(Matrix):
     """
     new_file = imp.pathname("RecScan1430.csv")
     np.savetxt(new_file, Matrix, delimiter=",")
+
 
 def poly_max(Matrix, column=2):
     """
@@ -49,7 +54,9 @@ def poly_max(Matrix, column=2):
     """
     index = np.argmax(Matrix[:, column])
     window = set_window(index, len(Matrix))
-    fft_peak = np.mean(Matrix[window[0]:window[1], 1])
+    # fft_peak = np.mean(Matrix[window[0]:window[1], 1])
+    meanFFT = FFTvInput(Matrix, 1)
+    fft_peak = PeakFromMean(meanFFT)
     #
     freq_slice = Matrix[window[0]:window[1],
                  0]
@@ -58,11 +65,12 @@ def poly_max(Matrix, column=2):
     amp_polyfit = np.polyfit(freq_slice,
                              amp_slice,
                              2)
-    freq_peak = -amp_polyfit[1]/(2*amp_polyfit[0])
-    amp_peak = amp_polyfit[0]*freq_peak**2 \
-               + amp_polyfit[1]*freq_peak \
+    freq_peak = -amp_polyfit[1] / (2 * amp_polyfit[0])
+    amp_peak = amp_polyfit[0] * freq_peak ** 2 \
+               + amp_polyfit[1] * freq_peak \
                + amp_polyfit[2]
     return [freq_peak, fft_peak, amp_peak]
+
 
 def poly_coeff(Matrix, column=2):
     """
@@ -82,6 +90,7 @@ def poly_coeff(Matrix, column=2):
                              2)
     return [window, amp_polyfit]
 
+
 def poly_data(Matrix, column=2):
     """
     Generates an polynomical fit array for plotting
@@ -97,14 +106,44 @@ def poly_data(Matrix, column=2):
     index = np.argmax(Matrix[:, column])
     window = set_window(index, len(Matrix))
     coeff = poly_coeff(Matrix)[1]
-    polyfit = np.zeros((window[1]-window[0],2))
-    m=0
-    for i in range (window[0],window[1]):
-        x = Matrix[i,0]
-        y = coeff[0]*x**2+coeff[1]*x+coeff[2]
-        polyfit[m,0]=x
-        polyfit[m,1]=y
-        m +=1
+    polyfit = np.zeros((window[1] - window[0], 2))
+    m = 0
+    for i in range(window[0], window[1]):
+        x = Matrix[i, 0]
+        y = coeff[0] * x ** 2 + coeff[1] * x + coeff[2]
+        polyfit[m, 0] = x
+        polyfit[m, 1] = y
+        m += 1
     return polyfit
 
 
+def FFTvInput(Matrix, column=2):
+    """
+       Compares the FFT value to the input frequency. Averages FFT within +/- 2 MHz of the input
+       1. find index of maximum
+       2. define a window of data to fit
+       3. calculate the coefficients of a 2nd order fit
+       4. define and then build polyfit
+       for a window
+       :param Matrix: (nx3) float
+       :param column: int (0-2)
+       :return: polyfit (nx2) float
+       """
+    meanFFT = []
+    for i in range(0, len(Matrix), 1):
+        diffInput = abs(Matrix[i,0]-Matrix[i,1])
+        if diffInput <= 2:
+            newRow = [Matrix[i,0],Matrix[i,1]]
+            meanFFT.append(newRow)
+        else:
+            1
+    meanFFT = np.asarray(meanFFT)
+    return meanFFT
+
+def PeakFromMean(meanMat):
+    """
+
+    :param meanMat:
+    :return:
+    """
+    return np.mean(meanMat[:,1])
